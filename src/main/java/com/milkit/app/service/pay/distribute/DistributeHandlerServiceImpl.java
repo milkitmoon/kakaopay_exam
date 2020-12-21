@@ -68,13 +68,15 @@ public class DistributeHandlerServiceImpl {
         long totalAmount = distribute.getAmount();
         int distCount = distribute.getDistCount();
 
+        long remainderAmount = totalAmount%distCount;
+
         for(int i=0; i<distCount; i++) {
             int denominator = (distCount-i);
-
             long detailAmount = totalAmount/denominator;
-            long remainderAmount = totalAmount%denominator;
+
             if(remainderAmount > 0) {
-                detailAmount = detailAmount+remainderAmount;
+                remainderAmount--;
+                detailAmount++;
             }
             totalAmount = totalAmount - detailAmount;
 

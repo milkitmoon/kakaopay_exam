@@ -151,7 +151,7 @@ log.debug(exception.getMessage());
 	public void getDistributeDetail_test() throws Exception {
 		for(int i=0; i<10; i++) {
 			Long amount = ThreadLocalRandom.current().nextLong(1000, 10000);
-			int distCount = ThreadLocalRandom.current().nextInt(10, 100);;
+			int distCount = ThreadLocalRandom.current().nextInt(10, 100);
 
 log.debug("amount:"+amount);
 log.debug("distCount:"+distCount);
@@ -164,6 +164,7 @@ log.debug("distCount:"+distCount);
 				.build();
 
 			List<DistributeDetail> result = distributeHandlerService.getDistributeDetail(distribute);
+//log.debug("result:"+result);
 
 			Long sumAmount = getReceiveAmountSum(result);
 
