@@ -75,8 +75,8 @@ public class DistributeHandlerServiceImpl {
             long detailAmount = totalAmount/denominator;
 
             if(remainderAmount > 0) {
-                remainderAmount--;
                 detailAmount++;
+                remainderAmount--;
             }
             totalAmount = totalAmount - detailAmount;
 

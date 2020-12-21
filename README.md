@@ -98,13 +98,15 @@ public List<DistributeDetail> getDistributeDetail(Distribute distribute) {
     long totalAmount = distribute.getAmount();              /*  뿌리기 전체금액    */
     int distCount = distribute.getDistCount();              /*  뿌리기 인원수    */
 
+    long remainderAmount = totalAmount%distCount;           /*  분배금액 동일하게 떨어지지 않을 수 있기 때문에 나머지 금액을 구함   */
+
     for(int i=0; i<distCount; i++) {
         int denominator = (distCount-i);                    /*  분배값을 구하기 위한 분모(루프가 수행됨에 따라 1씩 감소)    */
-
         long detailAmount = totalAmount/denominator;        /*  분배금액을 구하기 위해 뿌리기 전체금액에서 분모로 나눔   */
-        long remainderAmount = totalAmount%denominator;     /*  분배금액 동일하게 떨어지지 않을 수 있기 때문에 나머지 금액을 구함   */
-        if(remainderAmount > 0) {                           /*  나머지 금액이 있다면 분매금액에 더하기를 함    */
-            detailAmount = detailAmount+remainderAmount;
+
+        if(remainderAmount > 0) {
+            detailAmount++;                                 /*  나머지 금액이 있다면 분매금액에 1씩 더하기를 함    */
+            remainderAmount--;                              /*  나머지 금액읗 1씩 빼줌    */
         }
         totalAmount = totalAmount - detailAmount;           /*  전체뿌리기 금액에서 분백금액을 빼줌 */
 
