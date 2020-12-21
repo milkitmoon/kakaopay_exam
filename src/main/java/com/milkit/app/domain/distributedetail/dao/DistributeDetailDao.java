@@ -21,7 +21,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-public interface DistributeDetailDao extends JpaRepository<DistributeDetail, Long>, JpaSpecificationExecutor<DistributeDetail>  {
+public interface DistributeDetailDao extends JpaRepository<DistributeDetail, Long>, JpaSpecificationExecutor<DistributeDetail>, DistributeDetailCustomDao {
 	
 
 	public List<DistributeDetail> findByDistID(Long distID);

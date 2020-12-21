@@ -19,7 +19,7 @@ import com.milkit.app.domain.distribute.Distribute;
 import com.milkit.app.domain.distribute.dao.DistributeDao;
 import com.milkit.app.domain.distributedetail.DistributeDetail;
 import com.milkit.app.domain.distributedetail.dao.DistributeDetailDao;
-import com.milkit.app.domain.distributedetail.dao.DistributeDetailCustomDao;
+import com.milkit.app.domain.distributedetail.dao.DistributeDetailCustomDaoImpl;
 import com.milkit.app.util.StringUtil;
 
 import lombok.extern.slf4j.Slf4j;
@@ -32,8 +32,8 @@ public class DistributeDetailServiceImpl {
     @Autowired
     private DistributeDetailDao distributeDetailDao;
     
-    @Autowired
-    private DistributeDetailCustomDao distributeDetailCustomDao;
+//    @Autowired
+//    private DistributeDetailCustomDaoImpl distributeDetailCustomDao;
 
     
     public DistributeDetail insert(DistributeDetail distributeDetail) throws Exception {
@@ -57,7 +57,7 @@ public class DistributeDetailServiceImpl {
 	}
 
 	public DistributeDetail updateReceive(Long distID, String userID) throws Exception {
-		return distributeDetailCustomDao.updateReceive(distID, userID);
+		return distributeDetailDao.updateReceive(distID, userID);
 	}
 
 	public Long getReceiveAmount(Long distID) throws Exception {
