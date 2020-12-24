@@ -12,9 +12,13 @@ import com.milkit.app.domain.distribute.Distribute;
 import com.milkit.app.domain.distribute.service.DistributeServiceImpl;
 import com.milkit.app.domain.distribute.token.service.TokenGenerateHandlerServiceImpl;
 import com.milkit.app.domain.distributedetail.DistributeDetail;
+import com.milkit.app.service.pay.DistributeHandlerService;
+import com.milkit.app.service.pay.distribute.validate.DistributeRequestValidateDelegateServiceImpl;
+import com.milkit.app.service.pay.validate.RequestValidateService;
 import com.milkit.app.util.DateUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
@@ -22,7 +26,10 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Component
-public class DistributeHandlerServiceImpl {
+public class DistributeHandlerServiceImpl implements DistributeHandlerService<DistributeRequest, String> {
+
+    @Autowired
+    private RequestValidateService<DistributeRequest> validateDelegateService;
 
 	@Autowired
 	private DistributeServiceImpl distributeService;
@@ -31,7 +38,10 @@ public class DistributeHandlerServiceImpl {
     private TokenGenerateHandlerServiceImpl tokenGenerateHandlerService;
     
 
-    public String distribute(DistributeRequest distributeRequest) throws Exception {
+    @Override
+    public String process(HttpHeaders headers, DistributeRequest request) throws Exception {
+        DistributeRequest distributeRequest = validateDelegateService.validate(headers, request);
+
         Distribute distribute = generateDistribute(distributeRequest);
         List<DistributeDetail> distributeDetail = getDistributeDetail(distribute);
 

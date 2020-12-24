@@ -60,9 +60,9 @@ class DistributeHandlerServiceTests {
 		request.setAmount(amount);
 		request.setDistCount(distCount);
 
-		DistributeRequest distributeRequest = distributeRequestValidateDelegateService.process(headers, request);
+//		DistributeRequest distributeRequest = distributeRequestValidateDelegateService.validate(headers, request);
 
-		String result = distributeHandlerService.distribute(distributeRequest);
+		String result = distributeHandlerService.process(headers, request);
 log.debug("result:"+result);
 
 		Distribute distribute = distributeService.getDistribute(result);
@@ -87,8 +87,7 @@ log.debug("distribute:"+distribute);
 		request.setDistCount(distCount);
 
 		ServiceException exception = assertThrows(ServiceException.class, () -> {
-			DistributeRequest distributeRequest = distributeRequestValidateDelegateService.process(headers, request);
-			String result = distributeHandlerService.distribute(distributeRequest);
+			String result = distributeHandlerService.process(headers, request);
 		});
 
 log.debug(exception.getMessage());
@@ -112,8 +111,7 @@ log.debug(exception.getMessage());
 		request.setDistCount(distCount);
 
 		ServiceException exception = assertThrows(ServiceException.class, () -> {
-			DistributeRequest distributeRequest = distributeRequestValidateDelegateService.process(headers, request);
-			String result = distributeHandlerService.distribute(distributeRequest);
+			String result = distributeHandlerService.process(headers, request);
 		});
 
 log.debug(exception.getMessage());
@@ -137,8 +135,7 @@ log.debug(exception.getMessage());
 		request.setDistCount(distCount);
 
 		ServiceException exception = assertThrows(ServiceException.class, () -> {
-			DistributeRequest distributeRequest = distributeRequestValidateDelegateService.process(headers, request);
-			String result = distributeHandlerService.distribute(distributeRequest);
+			String result = distributeHandlerService.process(headers, request);
 		});
 
 log.debug(exception.getMessage());

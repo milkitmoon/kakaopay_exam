@@ -64,13 +64,14 @@ class ReceiveHandlerServiceTests {
 		long amount = 10000l;
 		int distCount = 3;
 
-		DistributeRequest distributeRequest = new DistributeRequest();
-		distributeRequest.setUserID(userID);
-		distributeRequest.setRoomID(roomID);
-		distributeRequest.setAmount(amount);
-		distributeRequest.setDistCount(distCount);
+		HttpHeaders distHeaders = new HttpHeaders();
+		distHeaders.set(AppCommon.DIST_USER_HEADER_STRING, userID);
+		distHeaders.set(AppCommon.DIST_ROOM_HEADER_STRING, roomID);
+		DistributeRequest distRequest = new DistributeRequest();
+		distRequest.setAmount(amount);
+		distRequest.setDistCount(distCount);
 
-		String token = distributeHandlerService.distribute(distributeRequest);
+		String token = distributeHandlerService.process(distHeaders, distRequest);
 
 		HttpHeaders headers = new HttpHeaders();
 		headers.set(AppCommon.DIST_USER_HEADER_STRING, receiveUserID);
@@ -78,8 +79,7 @@ class ReceiveHandlerServiceTests {
 		ReceiveRequest request = new ReceiveRequest();
 		request.setToken(token);
 
-		ReceiveRequest receiveRequest = receiveRequestValidateDelegateService.process(headers, request);
-		Long result = recieveHandlerService.receive(receiveRequest);
+		Long result = recieveHandlerService.process(headers, request);
 
 		log.debug("result:" + result);
 
@@ -99,13 +99,14 @@ class ReceiveHandlerServiceTests {
 		long amount = 10000l;
 		int distCount = 3;
 
-		DistributeRequest distributeRequest = new DistributeRequest();
-		distributeRequest.setUserID(userID);
-		distributeRequest.setRoomID(roomID);
-		distributeRequest.setAmount(amount);
-		distributeRequest.setDistCount(distCount);
+		HttpHeaders distHeaders = new HttpHeaders();
+		distHeaders.set(AppCommon.DIST_USER_HEADER_STRING, userID);
+		distHeaders.set(AppCommon.DIST_ROOM_HEADER_STRING, roomID);
+		DistributeRequest distRequest = new DistributeRequest();
+		distRequest.setAmount(amount);
+		distRequest.setDistCount(distCount);
 
-		String token = distributeHandlerService.distribute(distributeRequest);
+		String token = distributeHandlerService.process(distHeaders, distRequest);
 
 		HttpHeaders headers = new HttpHeaders();
 		headers.set(AppCommon.DIST_USER_HEADER_STRING, receiveUserID);
@@ -113,12 +114,10 @@ class ReceiveHandlerServiceTests {
 		ReceiveRequest request = new ReceiveRequest();
 		request.setToken(token);
 
-		ReceiveRequest receiveRequest = receiveRequestValidateDelegateService.process(headers, request);
-		Long firstResult = recieveHandlerService.receive(receiveRequest);
+		Long firstResult = recieveHandlerService.process(headers, request);
 
 		ServiceException exception = assertThrows(ServiceException.class, () -> {
-			ReceiveRequest againReceiveRequest = receiveRequestValidateDelegateService.process(headers, request);
-			Long result = recieveHandlerService.receive(againReceiveRequest);
+			Long result = recieveHandlerService.process(headers, request);
 		});
 
 		log.debug(exception.getMessage());
@@ -134,13 +133,14 @@ class ReceiveHandlerServiceTests {
 		long amount = 10000l;
 		int distCount = 3;
 
-		DistributeRequest distributeRequest = new DistributeRequest();
-		distributeRequest.setUserID(userID);
-		distributeRequest.setRoomID(roomID);
-		distributeRequest.setAmount(amount);
-		distributeRequest.setDistCount(distCount);
+		HttpHeaders distHeaders = new HttpHeaders();
+		distHeaders.set(AppCommon.DIST_USER_HEADER_STRING, userID);
+		distHeaders.set(AppCommon.DIST_ROOM_HEADER_STRING, roomID);
+		DistributeRequest distRequest = new DistributeRequest();
+		distRequest.setAmount(amount);
+		distRequest.setDistCount(distCount);
 
-		String token = distributeHandlerService.distribute(distributeRequest);
+		String token = distributeHandlerService.process(distHeaders, distRequest);
 
 		HttpHeaders headers = new HttpHeaders();
 		headers.set(AppCommon.DIST_USER_HEADER_STRING, userID);
@@ -149,8 +149,7 @@ class ReceiveHandlerServiceTests {
 		request.setToken(token);
 
 		ServiceException exception = assertThrows(ServiceException.class, () -> {
-			ReceiveRequest receiveRequest = receiveRequestValidateDelegateService.process(headers, request);
-			Long result = recieveHandlerService.receive(receiveRequest);
+			Long result = recieveHandlerService.process(headers, request);
 		});
 
 		log.debug(exception.getMessage());
@@ -168,13 +167,14 @@ class ReceiveHandlerServiceTests {
 		long amount = 10000l;
 		int distCount = 3;
 
-		DistributeRequest distributeRequest = new DistributeRequest();
-		distributeRequest.setUserID(userID);
-		distributeRequest.setRoomID(roomID);
-		distributeRequest.setAmount(amount);
-		distributeRequest.setDistCount(distCount);
+		HttpHeaders distHeaders = new HttpHeaders();
+		distHeaders.set(AppCommon.DIST_USER_HEADER_STRING, userID);
+		distHeaders.set(AppCommon.DIST_ROOM_HEADER_STRING, roomID);
+		DistributeRequest distRequest = new DistributeRequest();
+		distRequest.setAmount(amount);
+		distRequest.setDistCount(distCount);
 
-		String token = distributeHandlerService.distribute(distributeRequest);
+		String token = distributeHandlerService.process(distHeaders, distRequest);
 
 		HttpHeaders headers = new HttpHeaders();
 		headers.set(AppCommon.DIST_USER_HEADER_STRING, receiveUserID);
@@ -183,8 +183,7 @@ class ReceiveHandlerServiceTests {
 		request.setToken(token);
 
 		ServiceException exception = assertThrows(ServiceException.class, () -> {
-			ReceiveRequest receiveRequest = receiveRequestValidateDelegateService.process(headers, request);
-			Long result = recieveHandlerService.receive(receiveRequest);
+			Long result = recieveHandlerService.process(headers, request);
 		});
 
 		log.debug(exception.getMessage());
@@ -201,13 +200,14 @@ class ReceiveHandlerServiceTests {
 		long amount = 10000l;
 		int distCount = 3;
 
-		DistributeRequest distributeRequest = new DistributeRequest();
-		distributeRequest.setUserID(userID);
-		distributeRequest.setRoomID(roomID);
-		distributeRequest.setAmount(amount);
-		distributeRequest.setDistCount(distCount);
+		HttpHeaders distHeaders = new HttpHeaders();
+		distHeaders.set(AppCommon.DIST_USER_HEADER_STRING, userID);
+		distHeaders.set(AppCommon.DIST_ROOM_HEADER_STRING, roomID);
+		DistributeRequest distRequest = new DistributeRequest();
+		distRequest.setAmount(amount);
+		distRequest.setDistCount(distCount);
 
-		String token = distributeHandlerService.distribute(distributeRequest);
+		String token = distributeHandlerService.process(distHeaders, distRequest);
 
 		Distribute distribute = distributeService.getDistribute(token);
 		distribute.setReceiveLimitTime(new Date()); // 받기제한 시간을 현시간으로 임의로 수정
@@ -220,8 +220,7 @@ class ReceiveHandlerServiceTests {
 		request.setToken(token);
 
 		ServiceException exception = assertThrows(ServiceException.class, () -> {
-			ReceiveRequest receiveRequest = receiveRequestValidateDelegateService.process(headers, request);
-			Long result = recieveHandlerService.receive(receiveRequest);
+			Long result = recieveHandlerService.process(headers, request);
 		});
 
 		log.debug(exception.getMessage());
@@ -240,27 +239,30 @@ class ReceiveHandlerServiceTests {
 		Long amount = 10000l;
 		int distCount = 2;
 
-		DistributeRequest distributeRequest = new DistributeRequest();
-		distributeRequest.setUserID(userID);
-		distributeRequest.setRoomID(roomID);
-		distributeRequest.setAmount(amount);
-		distributeRequest.setDistCount(distCount);
+		HttpHeaders distHeaders = new HttpHeaders();
+		distHeaders.set(AppCommon.DIST_USER_HEADER_STRING, userID);
+		distHeaders.set(AppCommon.DIST_ROOM_HEADER_STRING, roomID);
+		DistributeRequest distRequest = new DistributeRequest();
+		distRequest.setAmount(amount);
+		distRequest.setDistCount(distCount);
 
-		String token = distributeHandlerService.distribute(distributeRequest);
+		String token = distributeHandlerService.process(distHeaders, distRequest);
 
+		HttpHeaders receiveHeaders1 = new HttpHeaders();
+		receiveHeaders1.set(AppCommon.DIST_USER_HEADER_STRING, receiveUserID1);
+		receiveHeaders1.set(AppCommon.DIST_ROOM_HEADER_STRING, roomID);
 		ReceiveRequest receiveRequest1 = new ReceiveRequest();
-		receiveRequest1.setUserID(receiveUserID1);
-		receiveRequest1.setRoomID(roomID);
 		receiveRequest1.setToken(token);
 
-		recieveHandlerService.receive(receiveRequest1);
+		Long receive1 = recieveHandlerService.process(receiveHeaders1, receiveRequest1);
 
+		HttpHeaders receiveHeaders2 = new HttpHeaders();
+		receiveHeaders2.set(AppCommon.DIST_USER_HEADER_STRING, receiveUserID2);
+		receiveHeaders2.set(AppCommon.DIST_ROOM_HEADER_STRING, roomID);
 		ReceiveRequest receiveRequest2 = new ReceiveRequest();
-		receiveRequest2.setUserID(receiveUserID2);
-		receiveRequest2.setRoomID(roomID);
 		receiveRequest2.setToken(token);
 
-		recieveHandlerService.receive(receiveRequest2);
+		Long receive2 = recieveHandlerService.process(receiveHeaders2, receiveRequest2);
 
 		HttpHeaders headers = new HttpHeaders();
 		headers.set(AppCommon.DIST_USER_HEADER_STRING, receiveUserID3);
@@ -269,8 +271,7 @@ class ReceiveHandlerServiceTests {
 		request.setToken(token);
 
 		ServiceException exception = assertThrows(ServiceException.class, () -> {
-			ReceiveRequest receiveRequest = receiveRequestValidateDelegateService.process(headers, request);
-			Long result = recieveHandlerService.receive(receiveRequest);
+			Long result = recieveHandlerService.process(headers, request);
 		});
 
 		log.debug(exception.getMessage());
@@ -287,13 +288,14 @@ class ReceiveHandlerServiceTests {
 		Long amount = 1000l;
 		int distCount = 5;
 
-		DistributeRequest distributeRequest = new DistributeRequest();
-		distributeRequest.setUserID(userID);
-		distributeRequest.setRoomID(roomID);
-		distributeRequest.setAmount(amount);
-		distributeRequest.setDistCount(distCount);
+		HttpHeaders distHeaders = new HttpHeaders();
+		distHeaders.set(AppCommon.DIST_USER_HEADER_STRING, userID);
+		distHeaders.set(AppCommon.DIST_ROOM_HEADER_STRING, roomID);
+		DistributeRequest distRequest = new DistributeRequest();
+		distRequest.setAmount(amount);
+		distRequest.setDistCount(distCount);
 
-		String token = distributeHandlerService.distribute(distributeRequest);
+		String token = distributeHandlerService.process(distHeaders, distRequest);
 
 		int loopCount = 100;
 		ExecutorService es = Executors.newFixedThreadPool(10);
@@ -301,14 +303,16 @@ class ReceiveHandlerServiceTests {
 		for (int i = 0; i < loopCount; i++) {
 			es.execute(() -> {
 				String receiveUserID = RandomStringUtils.random(10, "0123456789");
+
+				HttpHeaders receiveHeaders1 = new HttpHeaders();
+				receiveHeaders1.set(AppCommon.DIST_USER_HEADER_STRING, receiveUserID);
+				receiveHeaders1.set(AppCommon.DIST_ROOM_HEADER_STRING, roomID);
 				ReceiveRequest receiveRequest1 = new ReceiveRequest();
-				receiveRequest1.setUserID(receiveUserID);
-				receiveRequest1.setRoomID(roomID);
 				receiveRequest1.setToken(token);
 
 				try {
 //					TimeUnit.MILLISECONDS.sleep(100);
-					Long result = recieveHandlerService.receive(receiveRequest1);
+					Long result = recieveHandlerService.process(receiveHeaders1, receiveRequest1);
 log.debug("result:"+result);
 				} catch (Exception ex) {
 					log.error(ex.getMessage(), ex);

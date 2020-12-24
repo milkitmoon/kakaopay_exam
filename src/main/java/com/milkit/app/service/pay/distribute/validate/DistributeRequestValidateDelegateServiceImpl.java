@@ -8,6 +8,7 @@ import com.milkit.app.service.pay.validate.AbstractRequestValidateDelegateServic
 
 import org.springframework.stereotype.Component;
 
+@Component
 public class DistributeRequestValidateDelegateServiceImpl extends AbstractRequestValidateDelegateServiceImpl<DistributeRequest> {
 
     @Override

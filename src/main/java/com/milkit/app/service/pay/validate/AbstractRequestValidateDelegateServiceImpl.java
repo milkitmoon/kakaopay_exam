@@ -20,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 public abstract class AbstractRequestValidateDelegateServiceImpl<T extends ApprRequest> implements RequestValidateService<T> {
 
     @Override
-    public T process(HttpHeaders headers, T request) throws Exception {
+    public T validate(HttpHeaders headers, T request) throws Exception {
         List<String> headers1 = headers.get(AppCommon.DIST_USER_HEADER_STRING);
         List<String> headers2 = headers.get(AppCommon.DIST_ROOM_HEADER_STRING);
 

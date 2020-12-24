@@ -29,7 +29,6 @@ import com.milkit.app.domain.distribute.Distribute;
 import com.milkit.app.service.pay.distribute.DistributeHandlerServiceImpl;
 import com.milkit.app.service.pay.query.QueryHandlerServiceImpl;
 import com.milkit.app.service.pay.receive.ReceiveHandlerServiceImpl;
-import com.milkit.app.service.pay.validate.RequestValidateHandlerServiceImpl;
 import com.milkit.app.service.pay.validate.RequestValidateService;
 
 import io.swagger.annotations.Api;
@@ -42,9 +41,6 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @Api(tags = "1. 카카오페이 뿌리기", value = "DistributeController")
 public class DistributeController extends AbstractApiController {
-
-    @Autowired
-    private RequestValidateHandlerServiceImpl requestValidateHandlerService;
 
     
     @Autowired
@@ -62,9 +58,8 @@ public class DistributeController extends AbstractApiController {
     public ResponseEntity<GenericResponse<String>> distribute(
             @ApiParam(value = "API 헤더정보", required = true) @RequestHeader HttpHeaders headers, 
             @ApiParam(value = "뿌리기 요청정보", required = true) @RequestBody final DistributeRequest request) throws Exception {
-        DistributeRequest distributeRequest = requestValidateHandlerService.process(headers, request);
 
-        return apiResponse(() -> distributeHandlerService.distribute(distributeRequest));
+        return apiResponse(() -> distributeHandlerService.process(headers, request));
     }
 
     @PutMapping("/api/pay/receive")
@@ -72,9 +67,8 @@ public class DistributeController extends AbstractApiController {
     public ResponseEntity<GenericResponse<Long>> receive(
             @ApiParam(value = "API 헤더정보", required = true) @RequestHeader HttpHeaders headers, @RequestBody 
             @ApiParam(value = "받기 요청정보", required = true) final ReceiveRequest request) throws Exception {
-        ReceiveRequest receiveRequest = requestValidateHandlerService.process(headers, request);
 
-        return apiResponse(() -> receiveHandlerService.receive(receiveRequest));
+        return apiResponse(() -> receiveHandlerService.process(headers, request));
     }
 
     @GetMapping("/api/pay/query/{token}")
@@ -82,9 +76,8 @@ public class DistributeController extends AbstractApiController {
     public ResponseEntity<GenericResponse<Distribute>> query(
             @ApiParam(value = "API 헤더정보", required = true) @RequestHeader HttpHeaders headers, 
             @ApiParam(value = "뿌리기를 조회할 토큰정보", required = true) @PathVariable(value="token", required=true) String token) throws Exception {
-        QueryRequest queryRequest = requestValidateHandlerService.process(headers, new QueryRequest(token));
 
-        return apiResponse(() -> queryHandlerService.query(queryRequest));
+        return apiResponse(() -> queryHandlerService.process(headers, new QueryRequest(token)));
     }
 
     

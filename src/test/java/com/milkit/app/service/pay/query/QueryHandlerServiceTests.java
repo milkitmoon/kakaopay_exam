@@ -67,27 +67,30 @@ class QueryHandlerServiceTests {
 		Long amount = 10000l;
 		int distCount = 3;
 
-		DistributeRequest distributeRequest = new DistributeRequest();
-		distributeRequest.setUserID(userID);
-		distributeRequest.setRoomID(roomID);
-		distributeRequest.setAmount(amount);
-		distributeRequest.setDistCount(distCount);
+		HttpHeaders distHeaders = new HttpHeaders();
+		distHeaders.set(AppCommon.DIST_USER_HEADER_STRING, userID);
+		distHeaders.set(AppCommon.DIST_ROOM_HEADER_STRING, roomID);
+		DistributeRequest distRequest = new DistributeRequest();
+		distRequest.setAmount(amount);
+		distRequest.setDistCount(distCount);
 
-		String token = distributeHandlerService.distribute(distributeRequest);
+		String token = distributeHandlerService.process(distHeaders, distRequest);
 
+		HttpHeaders receiveHeaders1 = new HttpHeaders();
+		receiveHeaders1.set(AppCommon.DIST_USER_HEADER_STRING, receiveUserID1);
+		receiveHeaders1.set(AppCommon.DIST_ROOM_HEADER_STRING, roomID);
 		ReceiveRequest receiveRequest1 = new ReceiveRequest();
-		receiveRequest1.setUserID(receiveUserID1);
-		receiveRequest1.setRoomID(roomID);
 		receiveRequest1.setToken(token);
 
-		Long receive1 = recieveHandlerService.receive(receiveRequest1);
+		Long receive1 = recieveHandlerService.process(receiveHeaders1, receiveRequest1);
 
+		HttpHeaders receiveHeaders2 = new HttpHeaders();
+		receiveHeaders2.set(AppCommon.DIST_USER_HEADER_STRING, receiveUserID2);
+		receiveHeaders2.set(AppCommon.DIST_ROOM_HEADER_STRING, roomID);
 		ReceiveRequest receiveRequest2 = new ReceiveRequest();
-		receiveRequest2.setUserID(receiveUserID2);
-		receiveRequest2.setRoomID(roomID);
 		receiveRequest2.setToken(token);
 
-		Long receive2 = recieveHandlerService.receive(receiveRequest2);
+		Long receive2 = recieveHandlerService.process(receiveHeaders2, receiveRequest2);
 
 		HttpHeaders headers = new HttpHeaders();
 		headers.set(AppCommon.DIST_USER_HEADER_STRING, userID);
@@ -95,9 +98,7 @@ class QueryHandlerServiceTests {
 		QueryRequest request = new QueryRequest();
 		request.setToken(token);
 
-		QueryRequest queryRequest = queryRequestValidateDelegateService.process(headers, request);
-
-		Distribute result = queryHandlerService.query(queryRequest);
+		Distribute result = queryHandlerService.process(headers, request);
 		List<DistributeDetail> distributeDetail = result.getDetail();
 
 log.debug("result:"+result);	
@@ -120,27 +121,30 @@ log.debug("result:"+result);
 		Long amount = 10000l;
 		int distCount = 3;
 
-		DistributeRequest distributeRequest = new DistributeRequest();
-		distributeRequest.setUserID(userID);
-		distributeRequest.setRoomID(roomID);
-		distributeRequest.setAmount(amount);
-		distributeRequest.setDistCount(distCount);
+		HttpHeaders distHeaders = new HttpHeaders();
+		distHeaders.set(AppCommon.DIST_USER_HEADER_STRING, userID);
+		distHeaders.set(AppCommon.DIST_ROOM_HEADER_STRING, roomID);
+		DistributeRequest distRequest = new DistributeRequest();
+		distRequest.setAmount(amount);
+		distRequest.setDistCount(distCount);
 
-		String token = distributeHandlerService.distribute(distributeRequest);
+		String token = distributeHandlerService.process(distHeaders, distRequest);
 
+		HttpHeaders receiveHeaders1 = new HttpHeaders();
+		receiveHeaders1.set(AppCommon.DIST_USER_HEADER_STRING, receiveUserID1);
+		receiveHeaders1.set(AppCommon.DIST_ROOM_HEADER_STRING, roomID);
 		ReceiveRequest receiveRequest1 = new ReceiveRequest();
-		receiveRequest1.setUserID(receiveUserID1);
-		receiveRequest1.setRoomID(roomID);
 		receiveRequest1.setToken(token);
 
-		recieveHandlerService.receive(receiveRequest1);
+		Long receive1 = recieveHandlerService.process(receiveHeaders1, receiveRequest1);
 
+		HttpHeaders receiveHeaders2 = new HttpHeaders();
+		receiveHeaders2.set(AppCommon.DIST_USER_HEADER_STRING, receiveUserID2);
+		receiveHeaders2.set(AppCommon.DIST_ROOM_HEADER_STRING, roomID);
 		ReceiveRequest receiveRequest2 = new ReceiveRequest();
-		receiveRequest2.setUserID(receiveUserID2);
-		receiveRequest2.setRoomID(roomID);
 		receiveRequest2.setToken(token);
 
-		recieveHandlerService.receive(receiveRequest2);
+		Long receive2 = recieveHandlerService.process(receiveHeaders2, receiveRequest2);
 
 		HttpHeaders headers = new HttpHeaders();
 		headers.set(AppCommon.DIST_USER_HEADER_STRING, queryUserID);
@@ -149,8 +153,7 @@ log.debug("result:"+result);
 		request.setToken(token);
 
 		ServiceException exception = assertThrows(ServiceException.class, () -> {
-			QueryRequest queryRequest = queryRequestValidateDelegateService.process(headers, request);
-			Distribute result = queryHandlerService.query(queryRequest);
+			Distribute result = queryHandlerService.process(headers, request);
 		});
 
 log.debug(exception.getMessage());
@@ -168,27 +171,30 @@ log.debug(exception.getMessage());
 		Long amount = 10000l;
 		int distCount = 3;
 
-		DistributeRequest distributeRequest = new DistributeRequest();
-		distributeRequest.setUserID(userID);
-		distributeRequest.setRoomID(roomID);
-		distributeRequest.setAmount(amount);
-		distributeRequest.setDistCount(distCount);
+		HttpHeaders distHeaders = new HttpHeaders();
+		distHeaders.set(AppCommon.DIST_USER_HEADER_STRING, userID);
+		distHeaders.set(AppCommon.DIST_ROOM_HEADER_STRING, roomID);
+		DistributeRequest distRequest = new DistributeRequest();
+		distRequest.setAmount(amount);
+		distRequest.setDistCount(distCount);
 
-		String token = distributeHandlerService.distribute(distributeRequest);
+		String token = distributeHandlerService.process(distHeaders, distRequest);
 
+		HttpHeaders receiveHeaders1 = new HttpHeaders();
+		receiveHeaders1.set(AppCommon.DIST_USER_HEADER_STRING, receiveUserID1);
+		receiveHeaders1.set(AppCommon.DIST_ROOM_HEADER_STRING, roomID);
 		ReceiveRequest receiveRequest1 = new ReceiveRequest();
-		receiveRequest1.setUserID(receiveUserID1);
-		receiveRequest1.setRoomID(roomID);
 		receiveRequest1.setToken(token);
 
-		recieveHandlerService.receive(receiveRequest1);
+		Long receive1 = recieveHandlerService.process(receiveHeaders1, receiveRequest1);
 
+		HttpHeaders receiveHeaders2 = new HttpHeaders();
+		receiveHeaders2.set(AppCommon.DIST_USER_HEADER_STRING, receiveUserID2);
+		receiveHeaders2.set(AppCommon.DIST_ROOM_HEADER_STRING, roomID);
 		ReceiveRequest receiveRequest2 = new ReceiveRequest();
-		receiveRequest2.setUserID(receiveUserID2);
-		receiveRequest2.setRoomID(roomID);
 		receiveRequest2.setToken(token);
 
-		recieveHandlerService.receive(receiveRequest2);
+		Long receive2 = recieveHandlerService.process(receiveHeaders2, receiveRequest2);
 
 		Distribute distribute = distributeService.getDistribute(token);
 		distribute.setQueryLimitTime(new Date());				//조회 제한시간을 현시간으로 임의로 수정
@@ -201,8 +207,7 @@ log.debug(exception.getMessage());
 		request.setToken(token);
 
 		ServiceException exception = assertThrows(ServiceException.class, () -> {
-			QueryRequest queryRequest = queryRequestValidateDelegateService.process(headers, request);
-			Distribute result = queryHandlerService.query(queryRequest);
+			Distribute result = queryHandlerService.process(headers, request);
 		});
 
 log.debug(exception.getMessage());
