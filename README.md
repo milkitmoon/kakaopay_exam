@@ -93,6 +93,7 @@ public DistributeDetail updateReceive(Long distID, String userID) throws Excepti
 
 ## 6. 2 뿌릴 금액을 인원수에 맞게 분배 구현
 - 뿌릴 금액을 인원수에 맞게 분배하는 로직은 다음과 같이 개발하였습니다.
+- 뿌리기의 최대금액과 최소금액이 차이가 1원이내가 되도록 개선하였습니다.
 ```java
 public List<DistributeDetail> getDistributeDetail(Distribute distribute) {
     long totalAmount = distribute.getAmount();              /*  뿌리기 전체금액    */
@@ -159,7 +160,7 @@ public class ReceiveRequestValidateDelegateServiceImpl extends AbstractRequestVa
           .
           .
           .
-    Distribute result = queryHandlerService.query(queryRequest);
+    Distribute result = queryHandlerService.process(headers, request);
     List<DistributeDetail> distributeDetail = result.getDetail();
 
     assertTrue(
@@ -178,8 +179,7 @@ public class ReceiveRequestValidateDelegateServiceImpl extends AbstractRequestVa
           .
           .
     ServiceException exception = assertThrows(ServiceException.class, () -> {
-        QueryRequest queryRequest = queryRequestValidateDelegateService.process(headers, request);
-        Distribute result = queryHandlerService.query(queryRequest);
+        Distribute result = queryHandlerService.process(headers, request);
     });
 
     assertTrue( exception.getCode().equals("613"));
